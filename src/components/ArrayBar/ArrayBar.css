@@ -1,0 +1,8 @@
+.ArrayBar {
+  width: 1px;
+  display: inline-block;
+  background-color: #b0cac7;
+  width: 4px;
+  margin: 0 1px;
+  bottom: 0%;
+}
