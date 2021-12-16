@@ -3,23 +3,30 @@ import './Visualizer.css';
 import Aux from '../../hoc/ReactAux';
 import ArrayBar from '../../components/ArrayBar/ArrayBar';
 import Toolbar from '../../components/Toolbar/Toolbar';
+import Description from '../../components/Description/Description';
+import Slider from '../../components/Slider/Slider';
 import BubbleSortAnimator from '../../algorithms/BubbleSort/BubbleSort';
 import QuickSortAnimator from '../../algorithms/QuickSort/QuickSort';
 import HeapSortAnimator from '../../algorithms/HeapSort/HeapSort';
 import MergeSortAnimator from '../../algorithms/MergeSort/MergeSort';
 import InsertionSortAnimator from '../../algorithms/InsertionSort/InsertionSort';
 import SelectionSortAnimator from '../../algorithms/SelectionSort/SelectionSort';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const SPEED = 1;
-const BASE_NUMBER_OF_ARRAY_BARS = 150;
+const BASE_NUMBER_OF_ARRAY_BARS = 100;
 const randomNumberGenerator = (min, max) => (Math.floor(Math.random() * (max - min + 1) + min));
-const PRIMARY_COLOR = 'turquoise';
-const SECONDARY_COLOR = 'red';
+const PRIMARY_COLOR = '#32a871';
+const SECONDARY_COLOR = '#FF5733';
 
 class Visualizer extends Component {
+  
   state = {
     array: [],
     color: null,
+    algo: 'Sorting Algorithm'
   };
 
   componentDidMount() {
@@ -30,15 +37,26 @@ class Visualizer extends Component {
     const array=[];
     let maxHeight = window.innerHeight;
     let maxWidth = window.innerWidth;
-    console.log(maxWidth);
-    for(let i = 0; i < BASE_NUMBER_OF_ARRAY_BARS * maxWidth / 1280; i++) {
-      if(maxWidth > 1000) {
-        array.push(randomNumberGenerator(0.01 * maxHeight, 0.8* maxHeight));
+
+    let numOfArrays = BASE_NUMBER_OF_ARRAY_BARS;
+    if(maxWidth >= 1008) {
+      numOfArrays = BASE_NUMBER_OF_ARRAY_BARS;
+    } else if(maxWidth >= 641) {
+      numOfArrays = 0.75 * BASE_NUMBER_OF_ARRAY_BARS;
+    } else {
+      numOfArrays = 0.4 * BASE_NUMBER_OF_ARRAY_BARS;
+    }
+
+    console.log(maxHeight);
+    
+    for(let i = 0; i < numOfArrays; i++) {
+      if(maxWidth > 1008) {
+        array.push(randomNumberGenerator(0.01 * maxHeight, 0.7* maxHeight));
       } else {
-        array.push(randomNumberGenerator(0.01 * maxHeight, 0.6* maxHeight));
+        array.push(randomNumberGenerator(0.01 * maxHeight, 0.4* maxHeight));
       }
     }
-    this.setState({array: array, color: PRIMARY_COLOR});
+    this.setState({array: array, color: PRIMARY_COLOR, algo: 'Sorting Algorithm'});
   }
 
 
@@ -92,31 +110,37 @@ class Visualizer extends Component {
         default: break;
       }
     }
+    this.setState({algo: 'MergeSort'})
   }
 
   quickSortHandler = () => {
     const animations = QuickSortAnimator(this.state.array);
     this.animationHandler(animations);
+    this.setState({algo: 'QuickSort'})
   }
 
   bubbleSortHandler = () => {
     const animations = BubbleSortAnimator(this.state.array);
     this.animationHandler(animations);
+    this.setState({algo: 'BubbleSort'})
   }
 
   heapSortHandler = () => {
     const animations = HeapSortAnimator(this.state.array);
     this.animationHandler(animations);
+    this.setState({algo: 'HeapSort'})
   }
 
   selectionSortHandler = () => {
     const animations = SelectionSortAnimator(this.state.array);
     this.animationHandler(animations);
+    this.setState({algo: 'SelectionSort'})
   }
 
   insertionSortHandler = () => {
     const animations = InsertionSortAnimator(this.state.array);
     this.animationHandler(animations);
+    this.setState({algo: 'InsertionSort'})
   }
 
 
@@ -131,9 +155,17 @@ class Visualizer extends Component {
           heapSort={this.heapSortHandler}
           quickSort={this.quickSortHandler}
           mergeSort={this.mergeSortHandler}/>
-        <div className='ArrayContainer'>
-          {this.state.array.map((value, idx)=> <ArrayBar key={idx} height={value} color={this.state.color}/>)}
-        </div>
+        <Container>
+          <Row>
+            <Col sm={8}>
+            <div className='ArrayContainer'>
+              {this.state.array.map((value, idx)=> <ArrayBar key={idx} height={value} color={this.state.color}/>)}
+            </div>
+            </Col>
+            <Col sm={4}><Description algo={this.state.algo}></Description></Col>
+          </Row>
+        </Container>
+        <Slider></Slider>
       </Aux>
     );
   }
