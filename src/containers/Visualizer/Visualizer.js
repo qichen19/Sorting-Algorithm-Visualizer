@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './Visualizer.css';
-import Aux from '../../hoc/ReactAux';
 import ArrayBar from '../../components/ArrayBar/ArrayBar';
 import Toolbar from '../../components/Toolbar/Toolbar';
 import Description from '../../components/Description/Description';
