@@ -15,18 +15,24 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const SPEED = 1;
+var SPEED = 1;
 const BASE_NUMBER_OF_ARRAY_BARS = 100;
 const randomNumberGenerator = (min, max) => (Math.floor(Math.random() * (max - min + 1) + min));
 const PRIMARY_COLOR = '#32a871';
 const SECONDARY_COLOR = '#FF5733';
+var timeOut1;
+var timeOut2;
+var timeOut3;
+var timeOut4;
+
 
 class Visualizer extends Component {
   
   state = {
     array: [],
     color: null,
-    algo: 'Sorting Algorithm'
+    algo: 'Sorting Algorithm',
+    speedState: true
   };
 
   componentDidMount() {
@@ -69,7 +75,7 @@ class Visualizer extends Component {
         case 0:
         case 3:
          const[barOneIdx, barTwoIdx] = animations[i];
-         setTimeout(() => {
+         timeOut1 = setTimeout(() => {
             arrayBars[barOneIdx].style.backgroundColor = color;
             arrayBars[barTwoIdx].style.backgroundColor = color;
           }, i*SPEED);
@@ -77,7 +83,7 @@ class Visualizer extends Component {
         case 2:
         case 1:
           const[barIdx, newHeight] = animations[i];
-          setTimeout(() => {
+          timeOut2 = setTimeout(() => {
             arrayBars[barIdx].style.height = `${newHeight}px`;
           }, i*SPEED);
           break;
@@ -96,14 +102,14 @@ class Visualizer extends Component {
         case 0:
         case 2:
           const[barOneIdx, barTwoIdx] = animations[i];
-          setTimeout(() => {
+          timeOut3 = setTimeout(() => {
             arrayBars[barOneIdx].style.backgroundColor = color;
             arrayBars[barTwoIdx].style.backgroundColor = color;
           }, i*SPEED);
           break;
         case 1:
           const[barIdx, newHeight] = animations[i];
-          setTimeout(() => {
+          timeOut4 = setTimeout(() => {
             arrayBars[barIdx].style.height = `${newHeight}px`;
           }, i*SPEED);
           break;
@@ -143,10 +149,29 @@ class Visualizer extends Component {
     this.setState({algo: 'InsertionSort'})
   }
 
+  changeSpeed = (speedRatio) => {
+    SPEED = 50 / speedRatio * SPEED;
+  }
+
+  stopTimeout = () => {
+    if(this.state.algo === 'Sorting Algorithm') {
+
+    }
+    else if(this.state.algo === "MergeSort") {
+      clearTimeout(timeOut3);
+      clearTimeout(timeOut4);
+    } else {
+      console.log(timeOut1);
+      clearTimeout(timeOut1);
+      clearTimeout(timeOut2);
+      console.log(timeOut1);
+    }
+  }
+
 
   render () {
     return (
-      <Aux>
+      <div>
         <Toolbar
           generate={this.resetArrayHandler}
           bubbleSort={this.bubbleSortHandler}
@@ -156,6 +181,8 @@ class Visualizer extends Component {
           quickSort={this.quickSortHandler}
           mergeSort={this.mergeSortHandler}/>
         <Container>
+          <h6>Speed</h6>
+          <Slider mutateSpeed={this.changeSpeed}></Slider>
           <Row>
             <Col sm={8}>
             <div className='ArrayContainer'>
@@ -165,8 +192,8 @@ class Visualizer extends Component {
             <Col sm={4}><Description algo={this.state.algo}></Description></Col>
           </Row>
         </Container>
-        <Slider></Slider>
-      </Aux>
+        <footer className="bg-dark fixed-bottom"><p>© Copyright 2021 Qi Chen</p></footer>
+       </div>
     );
   }
 }
