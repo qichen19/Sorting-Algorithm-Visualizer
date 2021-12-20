@@ -1,8 +1,10 @@
 .ArrayBar {
-  width: 1px;
   display: inline-block;
   background-color: #b0cac7;
-  width: 4px;
   margin: 0 1px;
   bottom: 0%;
 }
+
+@media (min-width:0px) { .ArrayBar {width: 1px} }
+@media (min-width:640px) { .ArrayBar {width: 2px} }
+@media (min-width:1008px) { .ArrayBar {width: 4px} }

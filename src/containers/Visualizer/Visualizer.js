@@ -43,24 +43,19 @@ class Visualizer extends Component {
     let maxHeight = window.innerHeight;
     let maxWidth = window.innerWidth;
 
-    let numOfArrays = BASE_NUMBER_OF_ARRAY_BARS;
-    if(maxWidth >= 1008) {
-      numOfArrays = BASE_NUMBER_OF_ARRAY_BARS;
-    } else if(maxWidth >= 641) {
-      numOfArrays = 0.75 * BASE_NUMBER_OF_ARRAY_BARS;
-    } else {
-      numOfArrays = 0.4 * BASE_NUMBER_OF_ARRAY_BARS;
-    }
-
     console.log(maxHeight);
     
-    for(let i = 0; i < numOfArrays; i++) {
+    for(let i = 0; i < BASE_NUMBER_OF_ARRAY_BARS; i++) {
       if(maxWidth > 1008) {
         array.push(randomNumberGenerator(0.01 * maxHeight, 0.7* maxHeight));
       } else {
         array.push(randomNumberGenerator(0.01 * maxHeight, 0.4* maxHeight));
       }
     }
+
+    // for(let i = 0; i < BASE_NUMBER_OF_ARRAY_BARS; i++) {
+    //   array.push(randomNumberGenerator(0.01, 0.7))
+    // }
     this.setState({array: array, color: PRIMARY_COLOR, algo: 'Sorting Algorithm'});
   }
 
