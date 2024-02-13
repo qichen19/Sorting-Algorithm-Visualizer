@@ -1,22 +1,22 @@
-## Sorting Algorithm Visualizer
+# Sorting Algorithm Visualizer
 
-This interactive web app was built using React and is used to visualize classic sorting algorithms such as bubble sort, insertion sort, selection sort, merge sort, quick sort, heap sort, etc.
+Explore the world of sorting algorithms with this interactive web application, meticulously crafted using React. Visualize classic sorting techniques such as bubble sort, insertion sort, selection sort, merge sort, quick sort, heap sort, and more.
 
-This app has been deployed with Netlify and can be accessible under https://unruffled-einstein-8814df.netlify.app/. I hope you have fun playing around with it as much as I do.
+## Deployment
 
+The Sorting Algorithm Visualizer is live on Netlify and can be accessed at [this link](https://unruffled-einstein-8814df.netlify.app/). Enjoy the immersive experience and have fun experimenting with different sorting algorithms!
 
-## Incentives
+## Motivation
 
-I'm always fascinated by all different kinds of sorting algorithms. Making them alive and seeing them in action through this project is a great satisfaction to me. Not to mention I also learn some valuable REACT front end skills along the way.
-
+Driven by a profound fascination for diverse sorting algorithms, this project brings them to life, providing a satisfying experience of witnessing these algorithms in action. Additionally, the journey has been an invaluable opportunity to enhance skills in React front-end development.
 
 ## Installation
 
-If you wish to run this app locally, clone this repo and install the dependencies.
-In the project directory, you can run:
+To run the app locally, clone this repository and install the necessary dependencies. Navigate to the project directory and execute the following command:
 
-### `npm start`
+```npm start```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This command launches the app in development mode. Visit http://localhost:3000 in your browser to explore the Sorting Algorithm Visualizer locally.
+
+Feel free to delve into the world of sorting algorithms and deepen your understanding while enjoying the interactive nature of this project.
 
